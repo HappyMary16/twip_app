@@ -1,19 +1,18 @@
 import 'package:flutter/foundation.dart';
-import 'package:twip_app/domain/models/route/route.dart';
+import 'package:twip_app/domain/models/path/path.dart';
 
-import '../../../data/repositories/roure_repository.dart';
+import '../../../data/repositories/path_repository.dart';
 
 class HomeViewModel extends ChangeNotifier {
-
   HomeViewModel({required this.routeRepository}) {
     _load();
   }
 
-  final RouteRepository routeRepository;
+  final PathRepository routeRepository;
 
-  final List<Route> _routes = [];
+  final List<Path> _routes = [];
 
-  List<Route> get routes => _routes;
+  List<Path> get routes => _routes;
 
   void _load() {
     try {

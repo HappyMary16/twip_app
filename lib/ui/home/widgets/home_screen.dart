@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 import '../../../routing/routes.dart';
 import '../../core/localization/applocalization.dart';
 import '../view_models/home_viewmodel.dart';
-import 'booking.dart';
+import 'path_list_item.dart';
 
 const String bookingButtonKey = 'booking-button';
 
@@ -18,7 +18,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,18 +40,12 @@ class _HomeScreenState extends State<HomeScreen> {
               slivers: [
                 SliverList.builder(
                   itemCount: widget.viewModel.routes.length,
-                  itemBuilder: (_, index) => Booking(
+                  itemBuilder: (_, index) => PathListItem(
                     key: ValueKey(index),
                     route: widget.viewModel.routes[index],
                     onTap: () => context.push(
                       Routes.routeWithId(widget.viewModel.routes[index].id),
                     ),
-                    confirmDismiss: (_) async {
-                      // wait for command to complete
-                      widget.viewModel.deleteRoute(widget.viewModel.routes[index].id);
-                      // if command completed successfully, return true
-                      return true;
-                    },
                   ),
                 ),
               ],

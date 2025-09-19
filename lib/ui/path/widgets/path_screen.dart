@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart' hide Route;
 import 'package:go_router/go_router.dart';
-import 'package:twip_app/ui/route/view_models/route_viewmodel.dart';
-import 'package:twip_app/ui/route/widgets/painting_list_item.dart';
+import 'package:twip_app/ui/core/ui/painting_list_item.dart';
+import 'package:twip_app/ui/path/view_models/path_viewmodel.dart';
 
 import '../../../domain/models/painting/painting.dart';
 import '../../../routing/routes.dart';
@@ -9,31 +9,16 @@ import '../../core/localization/applocalization.dart';
 
 const String bookingButtonKey = 'booking-button';
 
-class RouteScreen extends StatefulWidget {
-  const RouteScreen({super.key, required this.viewModel});
+class PathScreen extends StatefulWidget {
+  const PathScreen({super.key, required this.viewModel});
 
-  final RouteViewModel viewModel;
+  final PathViewModel viewModel;
 
   @override
-  State<RouteScreen> createState() => _RouteScreenState();
+  State<PathScreen> createState() => _PathScreenState();
 }
 
-class _RouteScreenState extends State<RouteScreen> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
-  void didUpdateWidget(covariant RouteScreen oldWidget) {
-    super.didUpdateWidget(oldWidget);
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
+class _PathScreenState extends State<PathScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,7 +26,8 @@ class _RouteScreenState extends State<RouteScreen> {
         // Workaround for https://github.com/flutter/flutter/issues/115358#issuecomment-2117157419
         heroTag: null,
         key: const ValueKey(bookingButtonKey),
-        onPressed: () => context.go(Routes.editRoute(widget.viewModel.route.id)),
+        onPressed: () =>
+            context.go(Routes.editRoute(widget.viewModel.route.id)),
         label: Text(AppLocalization.of(context).edit),
         icon: const Icon(Icons.edit_location_outlined),
       ),
@@ -49,7 +35,7 @@ class _RouteScreenState extends State<RouteScreen> {
       body: ListenableBuilder(
         listenable: widget.viewModel,
         builder: (context, _) {
-          List<Painting> paintings =  widget.viewModel.paintings;
+          List<Painting> paintings = widget.viewModel.paintings;
 
           return Column(
             children: [

@@ -1,23 +1,24 @@
 import 'package:flutter/foundation.dart';
 import 'package:twip_app/data/repositories/painting_repository.dart';
 import 'package:twip_app/domain/models/painting/painting.dart';
-import 'package:twip_app/domain/models/route/route.dart';
+import 'package:twip_app/domain/models/path/path.dart';
 
-import '../../../data/repositories/roure_repository.dart';
+import '../../../data/repositories/path_repository.dart';
 
-class RouteViewModel extends ChangeNotifier {
-  RouteViewModel({
+class PathViewModel extends ChangeNotifier {
+  PathViewModel({
     required this.routeRepository,
     required this.paintingRepository,
   });
 
-  final RouteRepository routeRepository;
+  final PathRepository routeRepository;
   final PaintingRepository paintingRepository;
 
-  late Route _route;
+  late Path _route;
   List<Painting> _paintings = [];
 
-  Route get route => _route;
+  Path get route => _route;
+
   List<Painting> get paintings => _paintings;
 
   void loadRout(int id) {
@@ -27,12 +28,6 @@ class RouteViewModel extends ChangeNotifier {
         _paintings.add(paintingRepository.getById(paintingId));
       }
     } finally {
-      notifyListeners();
-    }
-  }
-
-  void deleteRoute(int id) {
-    try {} finally {
       notifyListeners();
     }
   }

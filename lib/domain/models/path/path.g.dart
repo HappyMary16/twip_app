@@ -1,12 +1,12 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'route.dart';
+part of 'path.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-_Route _$RouteFromJson(Map<String, dynamic> json) => _Route(
+_Path _$PathFromJson(Map<String, dynamic> json) => _Path(
   id: (json['id'] as num).toInt(),
   name: json['name'] as String,
   paintings: (json['paintings'] as List<dynamic>)
@@ -14,7 +14,7 @@ _Route _$RouteFromJson(Map<String, dynamic> json) => _Route(
       .toList(),
 );
 
-Map<String, dynamic> _$RouteToJson(_Route instance) => <String, dynamic>{
+Map<String, dynamic> _$PathToJson(_Path instance) => <String, dynamic>{
   'id': instance.id,
   'name': instance.name,
   'paintings': instance.paintings,

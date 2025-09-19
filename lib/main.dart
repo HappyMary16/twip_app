@@ -2,9 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'config/dependencies.dart';
-
-import 'ui/core/localization/applocalization.dart';
 import 'routing/router.dart';
+import 'ui/core/localization/applocalization.dart';
 
 void main() {
   runApp(MultiProvider(providers: providers, child: const MyApp()));
@@ -17,9 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      localizationsDelegates: [
-        AppLocalizationDelegate(),
-      ],
+      localizationsDelegates: [AppLocalizationDelegate()],
       title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
