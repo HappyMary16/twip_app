@@ -15,17 +15,18 @@ class PathViewModel extends ChangeNotifier {
   final PaintingRepository paintingRepository;
 
   late Path _route;
-  List<Painting> _paintings = [];
+  final List<Painting> _paintings = [];
 
   Path get route => _route;
 
   List<Painting> get paintings => _paintings;
 
-  void loadRout(int id) {
+  Future<void> loadRout(int id) async {
     try {
       _route = routeRepository.getById(id);
       for (var paintingId in _route.paintings) {
-        _paintings.add(paintingRepository.getById(paintingId));
+        Painting painting = await paintingRepository.getById(paintingId);
+        _paintings.add(painting);
       }
     } finally {
       notifyListeners();

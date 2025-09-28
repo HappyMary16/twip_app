@@ -1,17 +1,31 @@
 import '../../domain/models/painting/painting.dart';
+import '../services/api_service.dart';
 
 class PaintingRepository {
-  final List<Painting> _paintings = [
-    Painting.fromJson({"id": 1, "name": "Nice painting 1"}),
-    Painting.fromJson({"id": 2, "name": "Nice painting 2"}),
-    Painting.fromJson({"id": 3, "name": "Nice painting 3"}),
-    Painting.fromJson({"id": 4, "name": "Nice painting 4"}),
-    Painting.fromJson({"id": 5, "name": "Nice painting 5"}),
-  ];
 
-  List<Painting> get paintings => _paintings;
+  PaintingRepository({required ApiService apiService})
+      : _apiService = apiService;
 
-  Painting getById(int ref) {
-    return _paintings.firstWhere((p) => p.id == ref);
+  final ApiService _apiService;
+
+  List<Painting> _cachedPaintings = [];
+
+  Future<List<Painting>> getPaintings() async {
+    if (_cachedPaintings.isEmpty) {
+      final result = await _apiService.getPaintings();
+      _cachedPaintings = result
+          .map((p) => Painting(id: p.id, name: p.title.uk ?? p.title.en ?? ""))
+          .toList();
+    }
+
+    return _cachedPaintings;
+  }
+
+  Future<Painting> getById(int ref) async {
+    if (_cachedPaintings.isEmpty) {
+      await getPaintings();
+    }
+
+    return _cachedPaintings.firstWhere((p) => p.id == ref);
   }
 }

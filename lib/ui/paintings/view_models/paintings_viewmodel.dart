@@ -7,13 +7,13 @@ class PaintingsViewModel extends ChangeNotifier {
 
   final PaintingRepository paintingRepository;
 
-  List<Painting> _paintings = [];
+  final List<Painting> _paintings = [];
 
   List<Painting> get paintings => _paintings;
 
-  void loadRout() {
+  Future<void> loadPaintings() async {
     try {
-      _paintings.addAll(paintingRepository.paintings);
+      _paintings.addAll(await paintingRepository.getPaintings());
     } finally {
       notifyListeners();
     }
