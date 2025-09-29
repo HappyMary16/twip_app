@@ -6,6 +6,7 @@ import 'package:twip_app/ui/path/view_models/path_viewmodel.dart';
 import '../../../domain/models/painting/painting.dart';
 import '../../../routing/routes.dart';
 import '../../core/localization/applocalization.dart';
+import '../../core/ui/navigaton_bar.dart';
 
 const String bookingButtonKey = 'booking-button';
 
@@ -31,6 +32,7 @@ class _PathScreenState extends State<PathScreen> {
         label: Text(AppLocalization.of(context).edit),
         icon: const Icon(Icons.edit_location_outlined),
       ),
+      bottomNavigationBar: TwipNavigation(0),
       appBar: AppBar(title: Text(widget.viewModel.route.name)),
       body: ListenableBuilder(
         listenable: widget.viewModel,

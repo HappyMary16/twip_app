@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../../routing/routes.dart';
 import '../../core/localization/applocalization.dart';
+import '../../core/ui/navigaton_bar.dart';
 import '../view_models/home_viewmodel.dart';
 import 'path_list_item.dart';
 
@@ -30,6 +31,7 @@ class _HomeScreenState extends State<HomeScreen> {
         icon: const Icon(Icons.add_location_outlined),
       ),
       appBar: AppBar(title: Text(AppLocalization.of(context).routes)),
+      bottomNavigationBar: TwipNavigation(0),
       body: SafeArea(
         top: true,
         bottom: true,

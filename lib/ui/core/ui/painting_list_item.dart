@@ -9,6 +9,7 @@ class PaintingListItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      padding: const EdgeInsets.all(8),
       height: 50,
       alignment: Alignment.centerLeft,
       child: Text(painting.name, style: Theme.of(context).textTheme.titleLarge),

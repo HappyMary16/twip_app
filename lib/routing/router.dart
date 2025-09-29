@@ -48,6 +48,7 @@ GoRouter router() => GoRouter(
             final viewModel = PaintingsViewModel(
               paintingRepository: context.read(),
             );
+            viewModel.loadPaintings();
             return PaintingsScreen(viewModel: viewModel);
           },
           routes: [],
