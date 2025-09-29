@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
+import '../../utils/result.dart';
 import 'model/painting/painting_api.dart';
 
 class ApiService {
@@ -34,6 +35,32 @@ class ApiService {
       return List.empty();
     } finally {
       client.close();
+    }
   }
+
+  Future<Result<List<PaintingApi>>> getPaintingsWithErrorHandling() async {
+    var url =
+    Uri.https(_host, '/paintings.json');
+    // Uri.https('www.googleapis.com', '/books/v1/volumes', {'q': '{http}'});
+    // Uri.http('$_host:$_port', '/paintings/paintings.json');
+
+    var client = http.Client();
+    try {
+      var response = await client.get(url);
+      // final Map<String, String> headers = {'Authorization': 'Bearer token'};
+      // await http.get(url, headers: headers);
+
+      if (response.statusCode == 200 || response.statusCode == 304) {
+        final stringData = response.body;
+        final json = jsonDecode(stringData) as List<dynamic>;
+        return Result.ok(json.map((element) => PaintingApi.fromJson(element)).toList());
+      } else {
+        return Result.error(new Exception('Response status is ${response.statusCode}'));
+      }
+    } on Exception catch (error) {
+      return Result.error(error);
+    } finally {
+      client.close();
+    }
   }
 }
