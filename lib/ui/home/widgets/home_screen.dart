@@ -46,6 +46,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     key: ValueKey(index),
                     route: widget.viewModel.routes[index],
                     onTap: () => context.push(
+                      // перехід на сторінку з інформацією про маршрут
                       Routes.routeWithId(widget.viewModel.routes[index].id),
                     ),
                   ),
