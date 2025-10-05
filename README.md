@@ -1,16 +1,65 @@
 # twip_app
 
-An art trevel app
+Додаток для будування маршрутів по місцях зображених на мапі [TWIP](https://twip.me).
 
-## Getting Started
+## Як запустити проєкт
+Після того як ви склонували репозиторій і встановили flutter потрібно:
+- перейти в директорію проєкту (ту в якій лежить цей рідмі)
+- встановити залежності вказані в [pubspec.yaml](./pubspec.yaml) виконавши команду:
+`flutter pub get`
+- запустити додаток виконавши команду: `flutter run`
+- команда попросить обрати платформу на якій запускати додаток
+- готово, можна дивитись на запущений проєкт.
 
-This project is a starting point for a Flutter application.
+## Архітектура проєкту
+Проєкт побудований на основі архітектури MVVM (Model-View View Model).
+![img.png](readme/MVVM.png)
+![img.png](readme/Detailed%20MVVM.png)
 
-A few resources to get you started if this is your first Flutter project:
+Зображення взято зі сторінки [Guide to app architecture](https://docs.flutter.dev/app-architecture/guide#mvvm).
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### Взаємозвʼязок структури проєкту з архітектурою MVVM
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+#### Структура UI layer в проєкті
+
+![UI layer.png](readme/UI%20layer.png)
+Всі **UI компонети** знаходяться в **директорії ui**. Для кожної сторінки створюється 
+окрема директорія. Компоненти, які використовуються на декількох сторінках 
+одночасно можуть бути винесені в директорію **core**.
+
+**View** - це реалізація зовнішнього виду. Цей шар нічого не знає про дані. 
+Всі дані він бере з view-model. View нічого не знає про data шар, він ніколи 
+не взаємодіє з репозиторіями чи сервісами напряму.
+
+**View-Model** - це шар, який передає дані в View. Дані з data шару часто 
+структуровані в не зручному для відображення форматі. 
+View-model конвертує їх в зручний для відображеня вигляд.
+
+Також на зображенні присутній **domain** шар і моделі в ньому. Це моделі, 
+які передаються між UI i Data шарами. На діаграмі показані червоними 
+стрілочками з підписом **"domain models"**. Вони не відносяться ні до UI, 
+ні до Data шару тому винесені окремо.
+
+### Додаткові модулі
+
+#### Роутер
+Для реалізації роутеру використовується залежність [go_router](https://pub.dev/packages/go_router).
+Реалізація роутів в проєкті знаходиться в пакеті [routing](./lib/routing).
+
+В файлі [routes.dart](./lib/routing/routes.dart) знаходяться константи з шляхами до сторінок.
+Ці константи використовуються і в реалізації роутів в класі [router.dart](./lib/routing/router.dart)
+і на сторінках де реалізовується перехід на іншу сторінку.
+
+Для прикладу на сторінці [home](lib/ui/home/widgets/home_screen.dart) в рядку 48 ми переходимо на іншу сторінку. 
+Параметром методу `context.push(...)` передається результат виклику методу 
+`routeWithId` з файлу [routes.dart](./lib/routing/routes.dart).
+```
+context.push(
+  Routes.routeWithId(widget.viewModel.routes[index].id),
+)
+```
+
+**Note**: для того, щоб `context.push(...)` працював на сторінці де
+він використовується має бути доданий `import 'package:go_router/go_router.dart';`
+
+
