@@ -7,10 +7,12 @@ class AppLocalization {
   }
 
   static const _strings = <String, String>{
-    'routes': 'My routes',
+    'routes': 'My paths',
     'edit': 'Edit',
-    'addRoute': 'New route',
+    'addRoute': 'New path',
     'paintings': 'Paintings',
+    'pathName': 'Path name',
+    'selectPlacesToVisit': 'Select places to visit'
   };
 
   // If string for "label" does not exist, will show "[LABEL]"
@@ -18,12 +20,11 @@ class AppLocalization {
       _strings[label] ?? '[${label.toUpperCase()}]';
 
   String get routes => _get('routes');
-
   String get edit => _get('edit');
-
   String get addRoute => _get('addRoute');
-
   String get paintings => _get('paintings');
+  String get pathName => _get('pathName');
+  String get selectPlacesToVisit => _get('selectPlacesToVisit');
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<AppLocalization> {

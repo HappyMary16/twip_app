@@ -2,6 +2,8 @@ import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:twip_app/ui/paintings/view_models/paintings_viewmodel.dart';
 
+import '../ui/addpath/addpath_screen.dart';
+import '../ui/addpath/addpath_viewmodel.dart';
 import '../ui/home/view_models/home_viewmodel.dart';
 import '../ui/home/widgets/home_screen.dart';
 import '../ui/paintings/widgets/paintings_screen.dart';
@@ -41,6 +43,18 @@ GoRouter router() => GoRouter(
               },
             ),
           ],
+        ),
+        GoRoute(
+          path: Routes.newRoute,
+          builder: (context, state) {
+            final viewModel = AddPathViewModel(
+              routeRepository: context.read(),
+              paintingRepository: context.read(),
+            );
+
+            viewModel.loadPaintings();
+            return AddPathScreen(viewModel: viewModel);
+          },
         ),
         GoRoute(
           path: Routes.paintings,

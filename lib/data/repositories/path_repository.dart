@@ -38,4 +38,9 @@ class PathRepository {
   void deleteRoute(int ref) {
     _routes.removeWhere((route) => route.id == ref);
   }
+
+  void addPath(Path path) {
+    _routes.add(path);
+    print("New path is saved");
+  }
 }

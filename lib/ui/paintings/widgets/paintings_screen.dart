@@ -7,8 +7,6 @@ import '../../core/localization/applocalization.dart';
 import '../../core/ui/error_indicator.dart';
 import '../../core/ui/navigaton_bar.dart';
 
-const String bookingButtonKey = 'booking-button';
-
 class PaintingsScreen extends StatefulWidget {
   const PaintingsScreen({super.key, required this.viewModel});
 
