@@ -37,13 +37,14 @@ class PathDb {
 
 class PathProvider {
 
-  PathProvider() {
-    open("twip.db");
-  }
-
   late Database _db;
+  bool dbInitide = false;
 
   Future open(String path) async {
+    if (dbInitide) {
+      return;
+    }
+
     print("Init db");
     _db = await openDatabase(
       path,
@@ -57,15 +58,19 @@ create table $tablePath (
 ''');
       },
     );
+
+    dbInitide = true;
     print("Db inited");
   }
 
   Future<PathDb> insert(PathDb todo) async {
+    await open("twip.db");
     todo.id = await _db.insert(tablePath, todo.toMap());
     return todo;
   }
 
   Future<List<PathDb>> getPaths() async {
+    await open("twip.db");
     List<Map<String, Object?>> maps = await _db.query(
       tablePath,
       columns: [columnId, columnPaintings, columnName]
@@ -77,6 +82,7 @@ create table $tablePath (
   }
 
   Future<PathDb?> getPath(int id) async {
+    await open("twip.db");
     List<Map<String, Object?>> maps = await _db.query(
       tablePath,
       columns: [columnId, columnPaintings, columnName],
@@ -90,10 +96,12 @@ create table $tablePath (
   }
 
   Future<int> delete(int id) async {
+    await open("twip.db");
     return await _db.delete(tablePath, where: '$columnId = ?', whereArgs: [id]);
   }
 
   Future<int> update(PathDb todo) async {
+    await open("twip.db");
     return await _db.update(
       tablePath,
       todo.toMap(),
