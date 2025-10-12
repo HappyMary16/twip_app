@@ -1,6 +1,8 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
+import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 import '../../../domain/models/path/path.dart';
 
@@ -46,6 +48,11 @@ class PathProvider {
     }
 
     print("Init db");
+    if (kIsWeb) {
+      // Change default factory on the web
+      databaseFactory = databaseFactoryFfiWeb;
+    }
+
     _db = await openDatabase(
       path,
       version: 1,
