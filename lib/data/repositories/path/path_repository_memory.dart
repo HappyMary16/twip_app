@@ -1,6 +1,9 @@
+import 'package:twip_app/data/repositories/path/path_repository.dart';
 import 'package:twip_app/domain/models/path/path.dart';
 
-class PathRepository {
+/// Зберігає дані в оперативній памʼяті
+class PathRepositoryMemory extends PathRepository {
+
   final List<Path> _routes = [
     Path.fromJson({
       "id": 1,
@@ -29,17 +32,23 @@ class PathRepository {
     }),
   ];
 
-  List<Path> get routes => _routes;
-
-  Path getById(int ref) {
-    return _routes.firstWhere((route) => route.id == ref);
+  @override
+  Future<List<Path>> getPaths() async {
+    return _routes;
   }
 
-  void deleteRoute(int ref) {
-    _routes.removeWhere((route) => route.id == ref);
+  @override
+  Future<Path> getById(int id) async {
+    return _routes.firstWhere((route) => route.id == id);
   }
 
-  void addPath(Path path) {
+  @override
+  Future<void> deletePath(int id) async {
+    _routes.removeWhere((route) => route.id == id);
+  }
+
+  @override
+  Future<void> addPath(Path path) async {
     _routes.add(path);
     print("New path is saved");
   }

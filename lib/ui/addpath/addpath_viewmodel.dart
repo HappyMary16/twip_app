@@ -4,7 +4,7 @@ import 'package:twip_app/domain/models/painting/painting.dart';
 import 'package:twip_app/domain/models/path/path.dart';
 import 'package:twip_app/utils/result.dart';
 
-import '../../../data/repositories/path_repository.dart';
+import '../../data/repositories/path/path_repository.dart';
 
 class AddPathViewModel extends ChangeNotifier {
   AddPathViewModel({

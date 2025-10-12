@@ -3,7 +3,7 @@ import 'package:twip_app/data/repositories/painting_repository.dart';
 import 'package:twip_app/domain/models/painting/painting.dart';
 import 'package:twip_app/domain/models/path/path.dart';
 
-import '../../../data/repositories/path_repository.dart';
+import '../../../data/repositories/path/path_repository.dart';
 
 class PathViewModel extends ChangeNotifier {
   PathViewModel({
@@ -23,7 +23,7 @@ class PathViewModel extends ChangeNotifier {
 
   Future<void> loadRout(int id) async {
     try {
-      _route = routeRepository.getById(id);
+      _route = await routeRepository.getById(id);
       for (var paintingId in _route.paintings) {
         Painting painting = await paintingRepository.getById(paintingId);
         _paintings.add(painting);
