@@ -26,21 +26,24 @@ class SettingsWidget extends StatelessWidget {
       bottomNavigationBar: TwipNavigation(2),
 
       // Тіло сторінки. тут додається все що відображається на сторінці.
-      body: Row(
-        children: [
-          const Text('Dark Mode'),
-          ListenableBuilder(
-            listenable: viewModel,
-            builder: (context, _) {
-              return Switch(
-                value: viewModel.isDarkMode,
-                onChanged: (_) {
-                  viewModel.toggle();
-                },
-              );
-            },
-          ),
-        ],
+      body: Padding(
+        padding: EdgeInsets.all(8),
+        child: Row(
+          children: [
+            const Text('Dark Mode'),
+            ListenableBuilder(
+              listenable: viewModel,
+              builder: (context, _) {
+                return Switch(
+                  value: viewModel.isDarkMode,
+                  onChanged: (_) {
+                    viewModel.toggle();
+                  },
+                );
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
