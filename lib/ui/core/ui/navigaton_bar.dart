@@ -28,6 +28,12 @@ class TwipNavigation extends StatelessWidget {
       label: 'Paintings',
       route: Routes.paintings,
     ),
+    NavigationData(
+      selectedIcon: Icon(Icons.settings),
+      icon: Icon(Icons.settings_outlined),
+      label: 'Settings',
+      route: Routes.settings,
+    ),
   ];
 
   @override

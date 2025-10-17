@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart' hide Route;
-import 'package:multi_dropdown/multi_dropdown.dart';
 import 'package:go_router/go_router.dart';
+import 'package:multi_dropdown/multi_dropdown.dart';
 
 import '../../../domain/models/painting/painting.dart';
 import '../../routing/routes.dart';
@@ -11,6 +11,12 @@ import 'addpath_viewmodel.dart';
 
 /// Екран для додавання нових маршрутів.
 /// На ньому користувач може ввести дані про маршрут і зберегти його.
+///
+/// Тут можна подивитись більше про обробку вводу користувача:
+/// https://docs.flutter.dev/get-started/fundamentals/user-input
+///
+/// Тут можна подивитись на приклад з формою
+/// https://github.com/flutter/samples/blob/main/form_app/lib/src/form_widgets.dart
 class AddPathScreen extends StatefulWidget {
   const AddPathScreen({super.key, required this.viewModel});
 
@@ -25,17 +31,11 @@ class _AddPathScreenState extends State<AddPathScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // Перед будуванням сторінки можна підготувати для неї якісь елементи.
-    // Тут ми готуємо елементи для випадаючого списку.
-    widget.viewModel.loadPaintings();
-    var items = widget.viewModel.paintings
-        .map((p) => DropdownItem(label: p.name, value: p))
-        .toList();
-
     // Scaffold описує структуру сторінки
     return Scaffold(
       // Верхній бар з заголовком сторінки і навігацією на
       // попередню сторінку, якщо така є.
+      // Навігація додаться автоматично коди є appBar.
       appBar: AppBar(title: Text(AppLocalization.of(context).addRoute)),
 
       // Навігаційна панель знизу сторінки. Вона в нас додана на всі сторінки

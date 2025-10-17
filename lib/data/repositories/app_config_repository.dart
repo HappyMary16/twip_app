@@ -8,7 +8,7 @@ class AppConfigRepository {
 
   final _darkModeController = StreamController<bool>.broadcast();
 
-  void setDarkMode(bool isDark) async {
+  Future setDarkMode(bool isDark) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setBool('isDark', isDark);
     _darkModeController.add(isDark);

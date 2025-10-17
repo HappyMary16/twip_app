@@ -3,6 +3,7 @@ abstract final class Routes {
   static const routes = '/routes';
   static const newRoute = '/newRoute';
   static const paintings = '/paintings';
+  static const settings = '/settings';
 
   static String routeWithId(int id) => '$routes/$id';
 
