@@ -34,7 +34,7 @@ GoRouter router() => GoRouter(
               builder: (context, state) {
                 final id = int.parse(state.pathParameters['id']!);
                 final viewModel = PathViewModel(
-                  routeRepository: context.read(),
+                  pathRepository: context.read(),
                   paintingRepository: context.read(),
                 );
 

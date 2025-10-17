@@ -40,10 +40,10 @@ class PathDb {
 class PathProvider {
 
   late Database _db;
-  bool dbInitide = false;
+  bool dbInited = false;
 
   Future open(String path) async {
-    if (dbInitide) {
+    if (dbInited) {
       return;
     }
 
@@ -66,14 +66,14 @@ create table $tablePath (
       },
     );
 
-    dbInitide = true;
+    dbInited = true;
     print("Db inited");
   }
 
-  Future<PathDb> insert(PathDb todo) async {
+  Future<PathDb> insert(PathDb pathDb) async {
     await open("twip.db");
-    todo.id = await _db.insert(tablePath, todo.toMap());
-    return todo;
+    pathDb.id = await _db.insert(tablePath, pathDb.toMap());
+    return pathDb;
   }
 
   Future<List<PathDb>> getPaths() async {
@@ -107,13 +107,13 @@ create table $tablePath (
     return await _db.delete(tablePath, where: '$columnId = ?', whereArgs: [id]);
   }
 
-  Future<int> update(PathDb todo) async {
+  Future<int> update(PathDb pathDb) async {
     await open("twip.db");
     return await _db.update(
       tablePath,
-      todo.toMap(),
+      pathDb.toMap(),
       where: '$columnId = ?',
-      whereArgs: [todo.id],
+      whereArgs: [pathDb.id],
     );
   }
 

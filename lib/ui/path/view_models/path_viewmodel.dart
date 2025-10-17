@@ -7,24 +7,27 @@ import '../../../data/repositories/path/path_repository.dart';
 
 class PathViewModel extends ChangeNotifier {
   PathViewModel({
-    required this.routeRepository,
+    required this.pathRepository,
     required this.paintingRepository,
   });
 
-  final PathRepository routeRepository;
+  final PathRepository pathRepository;
   final PaintingRepository paintingRepository;
 
-  late Path _route;
+  Path? _path;
   final List<Painting> _paintings = [];
 
-  Path get route => _route;
+  Path? get path => _path;
 
   List<Painting> get paintings => _paintings;
 
   Future<void> loadRout(int id) async {
     try {
-      _route = await routeRepository.getById(id);
-      for (var paintingId in _route.paintings) {
+      _path = await pathRepository.getById(id);
+      if (_path == null) {
+        return;
+      }
+      for (var paintingId in _path!.paintings) {
         Painting painting = await paintingRepository.getById(paintingId);
         _paintings.add(painting);
       }

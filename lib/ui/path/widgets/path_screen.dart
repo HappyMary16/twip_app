@@ -22,18 +22,20 @@ class PathScreen extends StatefulWidget {
 class _PathScreenState extends State<PathScreen> {
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
-      floatingActionButton: FloatingActionButton.extended(
+      floatingActionButton: ListenableBuilder(listenable: widget.viewModel,
+          builder: (context, _) => FloatingActionButton.extended(
         // Workaround for https://github.com/flutter/flutter/issues/115358#issuecomment-2117157419
         heroTag: null,
         key: const ValueKey(bookingButtonKey),
         onPressed: () =>
-            context.go(Routes.editRoute(widget.viewModel.route.id)),
+            context.go(Routes.editRoute(widget.viewModel.path?.id??0)),
         label: Text(AppLocalization.of(context).edit),
         icon: const Icon(Icons.edit_location_outlined),
-      ),
+      )),
       bottomNavigationBar: TwipNavigation(0),
-      appBar: AppBar(title: Text(widget.viewModel.route.name)),
+      appBar: AppBar(title: Text("Route info")),
       body: ListenableBuilder(
         listenable: widget.viewModel,
         builder: (context, _) {
@@ -41,6 +43,7 @@ class _PathScreenState extends State<PathScreen> {
 
           return Column(
             children: [
+              Text(widget.viewModel.path?.name??"", style: Theme.of(context).textTheme.headlineMedium,),
               // ListView не скролиться за замовчуванням
               ListView.builder(
                 shrinkWrap: true,
