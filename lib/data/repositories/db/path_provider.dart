@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:flutter/foundation.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:sqflite_common_ffi_web/sqflite_ffi_web.dart';
 
 import '../../../domain/models/path/path.dart';
+import 'db_factory.dart';
 
 final String tablePath = 'path';
 final String columnId = '_id';
@@ -39,46 +38,19 @@ class PathDb {
 
 class PathProvider {
 
-  late Database _db;
-  bool dbInited = false;
+  PathProvider({required TwipDbFactory dbFactory}): _dbFactory = dbFactory;
 
-  Future open(String path) async {
-    if (dbInited) {
-      return;
-    }
-
-    print("Init db");
-    if (kIsWeb) {
-      // Change default factory on the web
-      databaseFactory = databaseFactoryFfiWeb;
-    }
-
-    _db = await openDatabase(
-      path,
-      version: 1,
-      onCreate: (Database db, int version) async {
-        await db.execute('''
-create table $tablePath ( 
-  $columnId integer primary key autoincrement, 
-  $columnName text not null,
-  $columnPaintings text not null)
-''');
-      },
-    );
-
-    dbInited = true;
-    print("Db inited");
-  }
+  final TwipDbFactory _dbFactory;
 
   Future<PathDb> insert(PathDb pathDb) async {
-    await open("twip.db");
-    pathDb.id = await _db.insert(tablePath, pathDb.toMap());
+    Database db = await _dbFactory.database;
+    pathDb.id = await db.insert(tablePath, pathDb.toMap());
     return pathDb;
   }
 
   Future<List<PathDb>> getPaths() async {
-    await open("twip.db");
-    List<Map<String, Object?>> maps = await _db.query(
+    Database db = await _dbFactory.database;
+    List<Map<String, Object?>> maps = await db.query(
       tablePath,
       columns: [columnId, columnPaintings, columnName]
     );
@@ -89,8 +61,8 @@ create table $tablePath (
   }
 
   Future<PathDb?> getPath(int id) async {
-    await open("twip.db");
-    List<Map<String, Object?>> maps = await _db.query(
+    Database db = await _dbFactory.database;
+    List<Map<String, Object?>> maps = await db.query(
       tablePath,
       columns: [columnId, columnPaintings, columnName],
       where: '$columnId = ?',
@@ -103,19 +75,17 @@ create table $tablePath (
   }
 
   Future<int> delete(int id) async {
-    await open("twip.db");
-    return await _db.delete(tablePath, where: '$columnId = ?', whereArgs: [id]);
+    Database db = await _dbFactory.database;
+    return await db.delete(tablePath, where: '$columnId = ?', whereArgs: [id]);
   }
 
   Future<int> update(PathDb pathDb) async {
-    await open("twip.db");
-    return await _db.update(
+    Database db = await _dbFactory.database;
+    return await db.update(
       tablePath,
       pathDb.toMap(),
       where: '$columnId = ?',
       whereArgs: [pathDb.id],
     );
   }
-
-  Future close() async => _db.close();
 }
