@@ -56,7 +56,7 @@ void main() {
       // Симулюємо натискання на Switch
       await tester.tap(find.byType(Switch));
 
-      expect(viewModel.isDarkMode, true);
+      expect(viewModel.isDarkMode, true, reason: "Theme was not changed");
     });
   });
 }
