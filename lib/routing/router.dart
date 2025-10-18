@@ -1,7 +1,7 @@
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 import 'package:twip_app/ui/paintings/view_models/paintings_viewmodel.dart';
-import 'package:twip_app/ui/settings/settings_view_model.dart';
+import 'package:twip_app/ui/settings/settings_viewmodel.dart';
 
 import '../ui/addpath/addpath_screen.dart';
 import '../ui/addpath/addpath_viewmodel.dart';

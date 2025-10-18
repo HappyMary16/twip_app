@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart' hide Route;
-import 'package:twip_app/ui/settings/settings_view_model.dart';
+import 'package:twip_app/ui/settings/settings_viewmodel.dart';
 
 import '../core/localization/applocalization.dart';
 import '../core/ui/navigaton_bar.dart';
