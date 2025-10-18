@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
-import 'package:twip_app/data/repositories/app_config_repository.dart';
+
+import '../../data/repositories/appconfig/app_config_repository.dart';
 
 class SettingsViewModel extends ChangeNotifier {
   SettingsViewModel(this._appConfigRepository);

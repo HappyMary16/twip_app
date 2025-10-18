@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/foundation.dart';
 
-import 'data/repositories/app_config_repository.dart';
+import 'data/repositories/appconfig/app_config_repository.dart';
 
 class MainAppViewModel extends ChangeNotifier {
   MainAppViewModel(this._appConfigRepository) {
