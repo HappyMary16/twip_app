@@ -15,7 +15,7 @@
 
 ## Архітектура проєкту
 Проєкт побудований на основі архітектури MVVM (Model-View View Model).
-![horizontal-layers-with-icons.png](readme/horizontal-layers-with-icons.png)
+![horizontal-layers-with-icons.png](readme/MVVM.png)
 ![img.png](readme/Detailed%20MVVM.png)
 
 Зображення взято зі сторінки [Guide to app architecture](https://docs.flutter.dev/app-architecture/guide#mvvm).
