@@ -1,16 +1,16 @@
 {
-    "name": "twip_app",
-    "short_name": "twip_app",
+    "name": "TWIP Path",
+    "short_name": "TWIP Path",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "An art trevel app",
+    "description": "An art trevel app to build tourist routes.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
         {
-            "src": "icons/Icon-192.png",
+            "src": "icons/Icon-192.ico",
             "sizes": "192x192",
             "type": "image/png"
         },
@@ -20,7 +20,7 @@
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-maskable-192.png",
+            "src": "icons/Icon-maskable-192.ico",
             "sizes": "192x192",
             "type": "image/png",
             "purpose": "maskable"

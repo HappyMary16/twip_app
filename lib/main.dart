@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       listenable: viewModel,
       builder: (context, _) => MaterialApp.router(
         localizationsDelegates: [AppLocalizationDelegate()],
-        title: 'Flutter Demo',
+        title: 'TWIP Path',
         theme: viewModel.isDarkMode
             ? ThemeData.dark()
             : ThemeData(
