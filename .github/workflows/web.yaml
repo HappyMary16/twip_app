@@ -22,7 +22,7 @@ jobs:
       - name: Setup sqlite db
         run: dart run sqflite_common_ffi_web:setup
       - name: Build web app
-        run: flutter build web
+        run: flutter build web --base-href "/twip_app/"
       - name: Upload static files as artifact
         uses: actions/upload-pages-artifact@v3
         with:
