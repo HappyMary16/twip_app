@@ -19,6 +19,14 @@ version: 1.0.0+1
 environment:
   sdk: ^3.9.0
 
+msix_config:
+  display_name: TWIP Path
+  publisher_display_name: TWIP
+  identity_name: com.twip
+  msix_version: 1.0.0.0
+  logo_path: .\windows\runner\resources\app_icon.ico
+  capabilities: internetClient, location
+
 dependencies:
   flutter:
     sdk: flutter
@@ -46,6 +54,7 @@ dev_dependencies:
   freezed: ^3.0.0
   json_serializable: ^6.11.1
   mocktail: ^1.0.4
+  msix: ^3.16.12
 
 flutter:
   uses-material-design: true
