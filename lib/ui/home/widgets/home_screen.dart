@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart' hide Route;
 import 'package:go_router/go_router.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
@@ -21,13 +22,20 @@ class HomeScreen extends StatefulWidget {
   // інструкцією: https://docs.flutter.dev/cookbook/plugins/google-mobile-ads#7-configure-ads
   // Для тестування можна використати adUnitId з
   // https://developers.google.com/admob/android/test-ads#demo_ad_units
-  final String adUnitId = Platform.isAndroid
-      // Use this ad unit on Android...
-      ? 'ca-app-pub-3940256099942544/9214589741' // тестовий adUnitId
-      // ... or this one on iOS.
-      : 'ca-app-pub-3940256099942544/9214589741'; // тестовий adUnitId
+  late final String adUnitId;
 
-  HomeScreen({super.key, required this.viewModel, this.adSize = AdSize.banner});
+
+  HomeScreen({super.key, required this.viewModel, this.adSize = AdSize.banner}) {
+    if (kIsWeb) {
+      adUnitId = '';
+    } else {
+      adUnitId = Platform.isAndroid
+      // Use this ad unit on Android...
+          ? 'ca-app-pub-3940256099942544/9214589741' // тестовий adUnitId
+      // ... or this one on iOS.
+          : 'ca-app-pub-3940256099942544/9214589741'; // тестовий adUnitId
+    }
+  }
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
