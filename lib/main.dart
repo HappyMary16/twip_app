@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:provider/provider.dart';
 
 import 'config/dependencies.dart';
@@ -7,6 +10,9 @@ import 'routing/router.dart';
 import 'ui/core/localization/applocalization.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  unawaited(MobileAds.instance.initialize());
+
   runApp(
     MultiProvider(
       providers: providers,
